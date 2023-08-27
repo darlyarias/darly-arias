@@ -51,3 +51,4 @@ alter table clientes add foreign key (cod_sucursal) references cat_sucursal(cod_
 alter table cat_sucursal add foreign key (cod_ciudad) references cat_ciudad(cod_ciudad);
 alter table cat_sucursal add foreign key (cod_pais_region_zona) references cat_zona(cod_pais_region_zona);
 alter table cat_ciudad add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
+alter table cat_zona add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
