@@ -1,74 +1,53 @@
-CREATE DATABASE clientes
-CHARACTER utf8;
-
-
+CREATE DATABASE `clientes`;
+use clientes;
 CREATE TABLE cat_tip_doc(
-  cod_tip_doc int(1) NOT NULL UNIQUE,
-  desc_tip_doc varchar(30) NOT NULL,
-  PRIMARY KEY cod_tip_doc (cod_tip_doc)
-)
+  cod_tip_doc int not null unique primary key,
+  desc_tip_doc varchar(30) not null
+);
 
 CREATE TABLE cat_genero(
-  cod_tip_genero int(1) NOT NULL UNIQUE,
-  desc_tip_genero varchar(30) NOT NULL,
-  PRIMARY KEY cod_tip_genero (cod_tip_genero)
-)
+  cod_tip_genero int not null auto_increment primary key,
+  desc_tip_genero varchar(30) not null
+);
 
 CREATE TABLE cat_pais(
-  cod_pais_region_zona int(7) NOT NULL UNIQUE,
-  desc_pais varchar(30) NOT NULL,
-  PRIMARY KEY cod_pais_region_zona (cod_pais_region_zona),
-  FOREIGN KEY desc_pais(desc_pais)
-)
+  cod_pais_region_zona int not null unique primary key,
+  desc_pais varchar(30) not null
+);
 
 CREATE TABLE cat_zona(
-  cod_pais_region_zona int(7) NOT NULL UNIQUE,
-  desc_pais varchar(30) NOT NULL,
-  desc_zona varchar(30) NOT NULL,
-  desc_region varchar(30) NOT NULL,
-  PRIMARY KEY cod_pais_region_zona (cod_pais_region_zona),
-  FOREIGN KEY desc_pais(desc_pais),
-  
-  CONSTRAINT FK_ZONA_PAIS FOREIGN KEY (desc_pais) REFERENCES cat_pais (desc_pais)
-)
+  cod_pais_region_zona int not null unique primary key,
+  desc_pais varchar(30) not null,
+  desc_zona varchar(30) not null,
+  desc_region varchar(30) not null
+);
 
 CREATE TABLE cat_ciudad(
-  cod_ciudad int(4) NOT NULL UNIQUE,
-  desc_pais varchar(30) NOT NULL,
-  desc_ciudad varchar(30) NOT NULL,
-  desc_departamento varchar(30) NOT NULL,
-  PRIMARY KEY cod_ciudad (cod_ciudad),
-  FOREIGN KEY desc_pais(desc_pais),
-  
-  CONSTRAINT FK_CIUDAD_PAIS FOREIGN KEY (desc_pais) REFERENCES cat_pais (desc_pais)
-)
-
+  cod_ciudad int not null unique primary key,
+  desc_pais varchar(30) not null,
+  desc_ciudad varchar(30) not null,
+  desc_departamento varchar(30) not null
+);
 
 CREATE TABLE cat_sucursal(
-  cod_sucursal int(3) NOT NULL UNIQUE,
-  desc_sucursal varchar(30) NOT NULL,
-  cod_cuidad int(4) NOT NULL,
-  cod_pais_region_zona int(7) NOT NULL,
-  PRIMARY KEY cod_sucursal (cod_sucursal),
-  FOREIGN KEY cod_cuidad(cod_cuidad),
-  FOREIGN KEY cod_pais_region_zona(cod_pais_region_zona),
-  
-  CONSTRAINT FK_SUCURSAL_CIUDAD FOREIGN KEY (cod_cuidad) REFERENCES cat_ciudad (cod_cuidad),
-  CONSTRAINT FK_SUCURSAL_ZONA FOREIGN KEY (cod_pais_region_zona) REFERENCES cat_zona (cod_pais_region_zona)
-)
-
+  cod_sucursal int not null unique primary key,
+  desc_sucursal varchar(30) not null,
+  cod_ciudad int not null,
+  cod_pais_region_zona int not null
+);
 
 CREATE TABLE clientes(
-  id int(7) NOT NULL UNIQUE,
-  cod_tipo_doc int(1) NOT NULL,
-  cod_tip_genero int(1) NOT NULL,
-  fecha_nacimiento date NOT NULL,
-  ingresos double(13) NOT NULL,
-  cod_sucursal int(3) NOT NULL,
-  PRIMARY KEY id (id),
-  FOREIGN KEY desc_pais(desc_pais),
-  
-  CONSTRAINT FK_CLIENTE_TIPODOC FOREIGN KEY (cod_tipo_doc) REFERENCES cat_tip_doc (cod_tipo_doc),
-  CONSTRAINT FK_CLIENTE_GENERO FOREIGN KEY (cod_tip_genero) REFERENCES cat_genero (cod_tip_genero),
-  CONSTRAINT FK_CLIENTE_SUCURSAL FOREIGN KEY (cod_sucursal) REFERENCES cat_sucursal (cod_sucursal)
-)
+  id int not null unique primary key,
+  cod_tip_doc int not null,
+  cod_tip_genero int not null,
+  fecha_nacimiento date not null,
+  ingresos double not null,
+  cod_sucursal int not null
+);
+
+alter table clientes add foreign key (cod_tip_doc) references cat_tip_doc(cod_tip_doc);
+alter table clientes add foreign key (cod_tip_genero) references cat_genero(cod_tip_genero);
+alter table clientes add foreign key (cod_sucursal) references cat_sucursal(cod_sucursal);
+alter table cat_sucursal add foreign key (cod_ciudad) references cat_ciudad(cod_ciudad);
+alter table cat_sucursal add foreign key (cod_pais_region_zona) references cat_zona(cod_pais_region_zona);
+alter table cat_ciudad add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
