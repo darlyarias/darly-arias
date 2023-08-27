@@ -24,7 +24,7 @@ CREATE TABLE cat_zona(
 
 CREATE TABLE cat_ciudad(
   cod_ciudad int not null unique primary key,
-  desc_pais varchar(30) not null,
+  cod_pais_region_zona int not null,
   desc_ciudad varchar(30) not null,
   desc_departamento varchar(30) not null
 );
