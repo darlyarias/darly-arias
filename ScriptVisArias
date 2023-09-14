@@ -1,0 +1,5 @@
+create view vista_ciudad as
+select desc_ciudad,desc_departamento from  clientes.cat_ciudad
+where desc_departamento = 'Dpto del exterior';
+
+select * from vista_ciudad;
