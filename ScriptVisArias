@@ -3,3 +3,29 @@ select desc_ciudad,desc_departamento from  clientes.cat_ciudad
 where desc_departamento = 'Dpto del exterior';
 
 select * from vista_ciudad;
+
+create view Vista_sucursal as
+select cod_sucursal,desc_sucursal from clientes.cat_sucursal
+where cod_sucursal in (1,2,3);
+
+select * from Vista_sucursal;
+
+
+create view Vista_documentos_extranjeros as
+select cod_tip_doc,desc_tip_doc from clientes.cat_tip_doc
+where cod_tip_doc in (2,5);
+
+select * from Vista_documentos_extranjeros;
+
+
+create view Vista_zonas_colombia as
+select desc_pais,desc_zona,desc_region from clientes.cat_zona
+where desc_pais = "Colombia";
+
+select * from Vista_zonas_colombia;
+
+create view Vistas_ingresos as
+Select cod_tip_genero,fecha_nacimiento,ingresos from clientes.clientes
+where ingresos >= 2000000;
+
+select * from Vistas_ingresos;
