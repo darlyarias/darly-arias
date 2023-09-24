@@ -1,5 +1,7 @@
+#Creación procedimiento para ordenar una tabla
 DELIMITER $$
 CREATE PROCEDURE OrdenarTablas(
+#como parametros de entrada recibe el nombre de la tabla, el campo por el cual queremos ordenar y el metodo de ordenamiento: si es Ascendente se ingresa el valor ASC o si es descendente se ingresa el valor DESC
     IN nombre_de_tabla VARCHAR(255),
     IN nombre_de_campo VARCHAR(255),
     IN orden VARCHAR(4)
@@ -13,9 +15,10 @@ END$$
 DELIMITER ;
 
 
-
+#creación procedimiento para eliminar un registro de la tabla sucursal
 DELIMITER $$
-CREATE PROCEDURE eliminarSucursal(
+#los parametros de entrada son el codigo de la sucursal
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarSucursal`(
     IN codigo_sucursal INT
 )
 BEGIN
@@ -24,4 +27,4 @@ BEGIN
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 END$$
-DELIMITER ;
+DELIMITER ;
