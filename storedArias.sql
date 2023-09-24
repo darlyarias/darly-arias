@@ -11,3 +11,17 @@ BEGIN
     DEALLOCATE PREPARE stmt;
 END$$
 DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE PROCEDURE eliminarSucursal(
+    IN codigo_sucursal INT
+)
+BEGIN
+    SET @query = concat('delete from cat_sucursal where cod_sucursal = (',codigo_sucursal,');');
+    PREPARE stmt FROM @query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END$$
+DELIMITER ;
