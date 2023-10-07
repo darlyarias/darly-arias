@@ -40,7 +40,7 @@ CREATE TABLE cat_sucursal(
 CREATE TABLE cat_info_cliente(
   id int not null auto_increment primary key,
   nombre_cliente varchar(250) not null,
-  celular int not null
+  celular varchar(50) not null
 );
 
 CREATE TABLE clientes(
