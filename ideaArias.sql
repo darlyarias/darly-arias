@@ -45,6 +45,12 @@ CREATE TABLE clientes(
   cod_sucursal int not null
 );
 
+CREATE TABLE cat_info_cliente(
+  id int not null auto_increment primary key,
+  nombre_completo varchar(30) not null,
+  celular int not null
+);
+
 alter table clientes add foreign key (cod_tip_doc) references cat_tip_doc(cod_tip_doc);
 alter table clientes add foreign key (cod_tip_genero) references cat_genero(cod_tip_genero);
 alter table clientes add foreign key (cod_sucursal) references cat_sucursal(cod_sucursal);
@@ -52,3 +58,4 @@ alter table cat_sucursal add foreign key (cod_ciudad) references cat_ciudad(cod_
 alter table cat_sucursal add foreign key (cod_pais_region_zona) references cat_zona(cod_pais_region_zona);
 alter table cat_ciudad add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
 alter table cat_zona add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
+alter table cat_info_cliente add foreign key (id) references clientes(id);
