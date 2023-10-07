@@ -48,7 +48,7 @@ CREATE TABLE clientes(
 
 CREATE TABLE cat_info_cliente(
   id int not null auto_increment primary key,
-  nombre_cliente varchar(30) not null,
+  nombre_cliente varchar(250) not null,
   celular int not null
 );
 
