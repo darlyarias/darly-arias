@@ -37,6 +37,12 @@ CREATE TABLE cat_sucursal(
   cod_pais_region_zona int not null
 );
 
+CREATE TABLE cat_info_cliente(
+  id int not null auto_increment primary key,
+  nombre_cliente varchar(250) not null,
+  celular int not null
+);
+
 CREATE TABLE clientes(
   id int not null unique primary key,
   cod_tip_doc int not null,
@@ -46,20 +52,17 @@ CREATE TABLE clientes(
   cod_sucursal int not null
 );
 
-CREATE TABLE cat_info_cliente(
-  id int not null auto_increment primary key,
-  nombre_cliente varchar(250) not null,
-  celular int not null
-);
+
 
 alter table clientes add foreign key (cod_tip_doc) references cat_tip_doc(cod_tip_doc);
 alter table clientes add foreign key (cod_tip_genero) references cat_genero(cod_tip_genero);
 alter table clientes add foreign key (cod_sucursal) references cat_sucursal(cod_sucursal);
+alter table clientes add foreign key (id) references cat_info_cliente(id);
 alter table cat_sucursal add foreign key (cod_ciudad) references cat_ciudad(cod_ciudad);
 alter table cat_sucursal add foreign key (cod_pais_region_zona) references cat_zona(cod_pais_region_zona);
 alter table cat_ciudad add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
 alter table cat_zona add foreign key (cod_pais_region_zona) references cat_pais(cod_pais_region_zona);
-alter table cat_info_cliente add foreign key (id) references clientes(id);
+
 
 
 insert into cat_tip_doc values ( 1,"Cedula de ciudadania");
@@ -99,6 +102,30 @@ insert into cat_sucursal values ( 3,"Banco de cali", 3 , 1);
 insert into cat_sucursal values ( 4,"Sede santiago", 4 , 2);
 insert into cat_sucursal values ( 5,"Palm beach", 5 , 5);
 
+
+insert into cat_info_cliente values ( 1,"Darly Lorena Arias Santana", "3123445632");
+insert into cat_info_cliente values ( 2,"Erica Santana", "3123423332");
+insert into cat_info_cliente values ( 3,"Gelen Jineth Arias Mendez", "3195467879");
+insert into cat_info_cliente values ( 4,"Patricia Fernandez", "3183456784");
+insert into cat_info_cliente values ( 5,"Bertha De Lopez", "3153453332");
+insert into cat_info_cliente values ( 6,"Sofia Quiroz", "3143453332");
+insert into cat_info_cliente values ( 7,"Aura Maria Fuentes", "3143454534");
+insert into cat_info_cliente values ( 8,"Fredy Contreras", "3123423432");
+insert into cat_info_cliente values ( 9,"Armando Mendoza", "3133453782");
+insert into cat_info_cliente values ( 10,"Beatriz Aurora Pinzon Solano", "3129873332");
+insert into cat_info_cliente values ( 11,"Nicolas Mora", "3122343332");
+insert into cat_info_cliente values ( 12,"Julia Solano", "3161223332");
+insert into cat_info_cliente values ( 13,"Wilson Aricapa", "3125643332");
+insert into cat_info_cliente values ( 14,"Mario Calderon", "3123453332");
+insert into cat_info_cliente values ( 15,"Marcela Valencia", "312234332");
+insert into cat_info_cliente values ( 16,"Daniel Valencia", "3171253332");
+insert into cat_info_cliente values ( 17,"Fernando Arias", "3181153332");
+insert into cat_info_cliente values ( 18,"Osman Higuita", "3103453332");
+insert into cat_info_cliente values ( 19,"Maria Fernanda Pinzon Solano", "3153453332");
+insert into cat_info_cliente values ( 20,"Merlina Montoya", "3173453332");
+insert into cat_info_cliente values ( 21,"Maria Patricia Sanmarino", "3183453332");
+
+
 insert into clientes values ( 1,1,1,"1983-10-13",1000000,1);
 insert into clientes values ( 2,2,2,"1967-03-12",2000000,2);
 insert into clientes values ( 3,1,1,"1997-03-16",30000000,1);
@@ -120,26 +147,3 @@ insert into clientes values ( 18,9,2,"1984-02-09",400000,3);
 insert into clientes values ( 19,3,3,"1992-10-02",1100000,3);
 insert into clientes values ( 20,4,1,"2009-02-20",4500000,1);
 insert into clientes values ( 21,2,2,"2001-01-09",15000000,5);
-
-
-insert into cat_info_cliente values ( 1,"Darly Lorena Arias Santana", 312344564332);
-insert into cat_info_cliente values ( 2,"Erica Santana", 3123423332);
-insert into cat_info_cliente values ( 3,"Gelen Jineth Arias Mendez", 3195467879);
-insert into cat_info_cliente values ( 4,"Patricia Fernandez", 3183456784);
-insert into cat_info_cliente values ( 5,"Bertha De Lopez", 3153453332);
-insert into cat_info_cliente values ( 6,"Sofia Quiroz", 3143453332);
-insert into cat_info_cliente values ( 7,"Aura Maria Fuentes", 3143454534);
-insert into cat_info_cliente values ( 8,"Fredy Contreras", 3123423432);
-insert into cat_info_cliente values ( 9,"Armando Mendoza", 3133453782);
-insert into cat_info_cliente values ( 10,"Beatriz Aurora Pinzon Solano", 3129873332);
-insert into cat_info_cliente values ( 11,"Nicolas Mora", 3122343332);
-insert into cat_info_cliente values ( 12,"Julia Solano", 3161223332);
-insert into cat_info_cliente values ( 13,"Wilson Aricapa", 3125643332);
-insert into cat_info_cliente values ( 14,"Mario Calderon", 3123453332);
-insert into cat_info_cliente values ( 15,"Marcela Valencia", 312234332);
-insert into cat_info_cliente values ( 16,"Daniel Valencia", 3171253332);
-insert into cat_info_cliente values ( 17,"Fernando Arias", 3181153332);
-insert into cat_info_cliente values ( 18,"Osman Higuita", 3103453332);
-insert into cat_info_cliente values ( 19,"Maria Fernanda Pinzon Solano", 3153453332);
-insert into cat_info_cliente values ( 20,"Merlina Montoya", 3173453332);
-insert into cat_info_cliente values ( 21,"Maria Patricia Sanmarino", 3183453332);
